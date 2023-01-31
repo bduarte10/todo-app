@@ -1,25 +1,47 @@
+import { TaskType } from '../App'
 import Task from './Task'
 
-const TaskList = () => {
+interface TaskListProps {
+  tasks: TaskType[]
+  setTasks: React.Dispatch<React.SetStateAction<TaskType[]>>
+}
+
+const TaskList = ({ tasks, setTasks }: TaskListProps) => {
+  const completedTasks = tasks.filter((task) => task.isCompleted).length
   return (
     <>
       <div className=" max-w-[736px] w-full m-auto mb-6">
         <div className="flex justify-between ">
           <span className="text-blue font-bold text-sm flex gap-2 ">
-            Tarefas criadas{' '}
+            Tarefas criadas
             <span className="bg-gray-400 text-gray-200 px-2 rounded-full">
-              5
+              {tasks.length}
             </span>
           </span>
           <span className="text-purple font-bold text-sm flex gap-2">
             Concluídas
             <span className="bg-gray-400 text-gray-200 px-2 rounded-full ">
-              2 de 5
+              {`${completedTasks}
+               de ${tasks.length}`}
             </span>
           </span>
         </div>
       </div>
-      <Task />
+      {tasks.map((task) => (
+        <Task
+          key={task.id}
+          title={task.title}
+          handleIsComplete={() => {
+            const newTasks = tasks.map((item) =>
+              item.id === task.id
+                ? { ...item, isCompleted: !item.isCompleted }
+                : item
+            )
+            setTasks(newTasks)
+          }}
+          isCompleted={task.isCompleted}
+        />
+      ))}
     </>
   )
 }
