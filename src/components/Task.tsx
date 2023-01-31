@@ -5,9 +5,15 @@ interface TaskProps {
   title: string
   isCompleted: boolean
   handleIsComplete: () => void
+  handleDeleteTask: () => void
 }
 
-const Task = ({ title, handleIsComplete, isCompleted }: TaskProps) => {
+const Task = ({
+  title,
+  handleIsComplete,
+  isCompleted,
+  handleDeleteTask,
+}: TaskProps) => {
   return (
     <div className="max-w-[736px] w-full bg-gray-500 m-auto border border-gray-400 rounded-lg flex items-center  px-4 py-4 mb-3">
       <button
@@ -32,7 +38,10 @@ const Task = ({ title, handleIsComplete, isCompleted }: TaskProps) => {
         }>
         {title}
       </span>
-      <TbTrash className="ml-auto text-gray-300 hover:text-danger cursor-pointer" />
+      <TbTrash
+        onClick={handleDeleteTask}
+        className="ml-auto text-gray-300 hover:text-danger cursor-pointer"
+      />
     </div>
   )
 }

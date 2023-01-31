@@ -8,6 +8,12 @@ interface TaskListProps {
 
 const TaskList = ({ tasks, setTasks }: TaskListProps) => {
   const completedTasks = tasks.filter((task) => task.isCompleted).length
+
+  const deleteTask = (id: string) => {
+    const tasksWithoutDeleted = tasks.filter((item) => item.id !== id)
+    setTasks(tasksWithoutDeleted)
+  }
+
   return (
     <>
       <div className=" max-w-[736px] w-full m-auto mb-6">
@@ -40,6 +46,7 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
             setTasks(newTasks)
           }}
           isCompleted={task.isCompleted}
+          handleDeleteTask={() => deleteTask(task.id)}
         />
       ))}
     </>
