@@ -1,4 +1,5 @@
 import { TaskType } from '../App'
+import EmptyTaskList from './EmptyTaskList'
 import Task from './Task'
 
 interface TaskListProps {
@@ -15,8 +16,8 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
   }
 
   return (
-    <div className=" p-3 lg:p-0">
-      <div className=" max-w-[736px] w-full m-auto mb-6 ">
+    <div className=" p-3 lg:p-0 ">
+      <div className=" max-w-[736px] w-full m-auto mb-6  ">
         <div className="flex justify-between ">
           <span className="text-blue font-bold text-sm flex gap-2 ">
             Tarefas criadas
@@ -33,22 +34,28 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
           </span>
         </div>
       </div>
-      {tasks.map((task) => (
-        <Task
-          key={task.id}
-          title={task.title}
-          handleIsComplete={() => {
-            const newTasks = tasks.map((item) =>
-              item.id === task.id
-                ? { ...item, isCompleted: !item.isCompleted }
-                : item
-            )
-            setTasks(newTasks)
-          }}
-          isCompleted={task.isCompleted}
-          handleDeleteTask={() => deleteTask(task.id)}
-        />
-      ))}
+      <div className="h-full md:max-h-[680px] shadow-inner max-w-[736px] m-auto pr-2 overflow-y-auto">
+        {tasks.length === 0 ? (
+          <EmptyTaskList />
+        ) : (
+          tasks.map((task) => (
+            <Task
+              key={task.id}
+              title={task.title}
+              handleIsComplete={() => {
+                const newTasks = tasks.map((item) =>
+                  item.id === task.id
+                    ? { ...item, isCompleted: !item.isCompleted }
+                    : item
+                )
+                setTasks(newTasks)
+              }}
+              isCompleted={task.isCompleted}
+              handleDeleteTask={() => deleteTask(task.id)}
+            />
+          ))
+        )}
+      </div>
     </div>
   )
 }

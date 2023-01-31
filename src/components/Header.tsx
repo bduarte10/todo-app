@@ -2,6 +2,8 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { TaskType } from '../App'
 import logo from '../assets/Logo.svg'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface HeaderProps {
   addTask: (task: TaskType[]) => void
@@ -17,9 +19,13 @@ const Header = ({ addTask, tasks }: HeaderProps) => {
       title: value,
       isCompleted: false,
     }
-
-    addTask([...tasks, newTask])
-    setValue('')
+    if (newTask.title.trim() === '') {
+      return toast.error('Nenhuma tarefa foi definida')
+    } else {
+      addTask([...tasks, newTask])
+      setValue('')
+      toast.success('Tarefa adicionada com sucesso')
+    }
   }
 
   return (
@@ -40,7 +46,7 @@ const Header = ({ addTask, tasks }: HeaderProps) => {
 
         <button
           onClick={handleAddTask}
-          className="bg-blue-dark hover:bg-blue transition-colors text-sm font-bold px-4 py-4 flex rounded-lg items-center gap-2">
+          className="bg-blue-dark hover:bg-blue transition-colors text-sm font-bold px-4 py-4 flex rounded-lg items-center outline-none gap-2">
           Criar
           <AiOutlinePlusCircle size={16} />
         </button>
