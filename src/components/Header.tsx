@@ -1,7 +1,7 @@
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { TaskType } from '../App'
 import logo from '../assets/Logo.svg'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -13,7 +13,8 @@ interface HeaderProps {
 const Header = ({ addTask, tasks }: HeaderProps) => {
   const [value, setValue] = useState('')
 
-  function handleAddTask() {
+  function handleAddTask(e: FormEvent) {
+    e.preventDefault()
     const newTask: TaskType = {
       id: crypto.randomUUID(),
       title: value,
@@ -35,7 +36,7 @@ const Header = ({ addTask, tasks }: HeaderProps) => {
         alt="logo"
         className="h-[48px] w-[126px] "
       />
-      <div className="input-task max-w-[736px] w-full flex gap-2 absolute  px-3 lg:px-0">
+      <form className="input-task max-w-[736px] w-full flex gap-2 absolute  px-3 lg:px-0">
         <input
           type="text"
           value={value}
@@ -50,7 +51,7 @@ const Header = ({ addTask, tasks }: HeaderProps) => {
           Criar
           <AiOutlinePlusCircle size={16} />
         </button>
-      </div>
+      </form>
     </header>
   )
 }
