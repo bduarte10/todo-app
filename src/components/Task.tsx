@@ -38,10 +38,12 @@ const Task = ({
         }>
         {title}
       </span>
-      <TbTrash
-        onClick={handleDeleteTask}
-        className="ml-auto text-gray-300 hover:text-danger cursor-pointer"
-      />
+      <div className="group hover:bg-gray-400 rounded w-6 h-6 flex justify-center items-center ml-auto cursor-pointer">
+        <TbTrash
+          onClick={handleDeleteTask}
+          className="group-hover:text-danger  text-gray-300 "
+        />
+      </div>
     </div>
   )
 }

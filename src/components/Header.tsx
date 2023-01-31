@@ -29,17 +29,18 @@ const Header = ({ addTask, tasks }: HeaderProps) => {
         alt="logo"
         className="h-[48px] w-[126px] "
       />
-      <div className="input-task max-w-[736px] w-full flex gap-2 absolute">
+      <div className="input-task max-w-[736px] w-full flex gap-2 absolute  px-3 lg:px-0">
         <input
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="bg-gray-500 h-[54px] w-full placeholder:text-gray-300 pl-4 rounded-lg border border-gray-700"
+          className="bg-gray-500 h-[54px] w-full placeholder:text-gray-300 pl-4 rounded-lg border border-gray-700 outline-none  focus:border-purple-dark"
           placeholder="Adicione uma nova tarefa"
         />
+
         <button
           onClick={handleAddTask}
-          className="bg-blue-dark text-sm font-bold px-4 py-4 flex rounded-lg items-center gap-2">
+          className="bg-blue-dark hover:bg-blue transition-colors text-sm font-bold px-4 py-4 flex rounded-lg items-center gap-2">
           Criar
           <AiOutlinePlusCircle size={16} />
         </button>

@@ -15,8 +15,8 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
   }
 
   return (
-    <>
-      <div className=" max-w-[736px] w-full m-auto mb-6">
+    <div className=" p-3 lg:p-0">
+      <div className=" max-w-[736px] w-full m-auto mb-6 ">
         <div className="flex justify-between ">
           <span className="text-blue font-bold text-sm flex gap-2 ">
             Tarefas criadas
@@ -49,7 +49,7 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
           handleDeleteTask={() => deleteTask(task.id)}
         />
       ))}
-    </>
+    </div>
   )
 }
 
